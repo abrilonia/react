@@ -6,9 +6,9 @@ import ElBoton from "./Boton";
 //se recomienda que siempre se llame initialAlgo
 const initialUsuario={
    
-    nombre:"",
-    apellido:"",
-    username:"",
+    name:"",
+    lastName:"",
+    id:"",
     correo:"",
     clave:"",
     ciudad:"",
@@ -17,7 +17,7 @@ const initialUsuario={
 
 const UsuarioRegistro = ({userAdd, usuarioEditado, setUsuarioEditado, userEdit}) => {
     const [usuario, setUsuario] = useState(initialUsuario);
-    const {nro, nombre, apellido, username, correo, clave, ciudad, region} = usuario;
+    const {nro, name, lastName, id, correo, clave, ciudad, region} = usuario;
 
     //el hook useEffect está atento a si la variable que tiene dentro de sus corchetes cambia 
     //el deberá hacer todo lo que tiene en su función dentro
@@ -30,9 +30,9 @@ const UsuarioRegistro = ({userAdd, usuarioEditado, setUsuarioEditado, userEdit})
             setUsuario(
                 {
                     
-                    nombre:"",
-                    apellido:"",
-                    username:"",
+                    name:"",
+                    lastName:"",
+                    id:"",
                     correo:"",
                     clave:"",
                     ciudad:"",
@@ -67,10 +67,10 @@ const UsuarioRegistro = ({userAdd, usuarioEditado, setUsuarioEditado, userEdit})
 
         <div class="col-md-4">
         <label for="name">Nombre</label>
-        <input type="text" name="nombre" id="name"
+        <input type="text" name="name" id="name"
          placeholder="Ingresa tu nombre"
          
-         value={nombre}
+         value={name}
          onChange={handleInputChange}
          />
             {/** se tienen que poner los values así para que tome los datos del imput y 
@@ -78,18 +78,19 @@ const UsuarioRegistro = ({userAdd, usuarioEditado, setUsuarioEditado, userEdit})
         </div>
         <div class="col-md-4">
         <label for="name">Apellido</label>
-        <input type="text" name="apellido" id="lastname" 
+        <input type="text" name="lastName" id="lastname" 
         placeholder="Ingresa tu apellido"
-        value={apellido}
+        value={lastName}
         onChange={handleInputChange}
         />
         </div>
         <div class="col-md-4">
-        <label for="name">Username</label>
-        <input type="text" name="username" id="username" 
-        placeholder="Ingresa tu username"
-        value={username}
+        <label for="name">ID</label>
+        <input type="text" name="id" id="username" 
+        
+        value={id}
         onChange={handleInputChange}
+        disabled
         />
         </div>
         <div class="col-md-3">

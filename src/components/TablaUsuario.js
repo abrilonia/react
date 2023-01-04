@@ -10,7 +10,7 @@ const TablaUsuario = ({usuarios, deleteUser, setUsuarioEditado}) => {
                 <th scope="col">Nro</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
-                <th scope="col">Username</th>
+                <th scope="col">Id</th>
                 <th scope="col">Ciudad</th>
                 <th scope="col">Region</th>
                 <th scope="col">Acciones</th>
@@ -25,13 +25,13 @@ const TablaUsuario = ({usuarios, deleteUser, setUsuarioEditado}) => {
                     {usuario.nro}
                   </td>
                   <td>
-                    {usuario.nombre}
+                    {usuario.name}
                   </td>
                   <td>
-                    {usuario.apellido}
+                    {usuario.lastName}
                   </td>
                   <td>
-                    {usuario.username}
+                    {usuario.id}
                   </td>
                   <td>
                     {usuario.ciudad}
@@ -45,7 +45,7 @@ const TablaUsuario = ({usuarios, deleteUser, setUsuarioEditado}) => {
                   class="btn btn-danger"
                   
                   onClick={() => {
-                    deleteUser(usuario.username);
+                    deleteUser(usuario.id);
                   }}
                 > {/** el onClick para que funcione la función que se coloque en el cuerpo*/}
                  Eliminar

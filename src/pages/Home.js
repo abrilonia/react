@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ElBoton, UsuarioRegistro } from "../components";
+import { ElBoton, UsuarioRegistro} from "../components";
 import TablaUsuario from "../components/TablaUsuario";
 import "./Home.css";
 
+import { getAllUsers, addUser, editUser, deleteUser } from "../services/User";
 
 const usuario1=[
     {
@@ -39,24 +40,54 @@ const HomePage = () => {
     const [state, setState] = useState(usuario1);
     const [usuarioEditado, setUsuarioEditado]=useState(null);
 
-    const userDelete=(usernameUsuario)=>{
-        const changeUser = state.filter(usuario=> usuario.username!==usernameUsuario);
-        setState(changeUser)
-    };
+   
 
+    useEffect(()=>{
+
+        getUsers();
+
+    },[])
     //tienen que ir los tres puntos para que mantenga los usuarios creados y me agregue el que nuevo
-    const userAdd=(usuario)=>{
+   /*  const userAdd=(usuario)=>{
         const addUsuario=[
             ...state, usuario
         ]
         setState(addUsuario);
+    } */
+    const userAdd = async(addUsuario)=>{
+        //en esta línea se agrega un usuario a la BD
+        const usuarioBD=await addUser(addUsuario);
+        //aquí haremos que la tabla de actualice
+        getUsers();
     }
-    const userEdit = (usuarioEditado)=>{
+
+   /*  const userEdit = (usuarioEditado)=>{
         //aquí se usa el map para que recorra y me actualice el usuario que tiene el parámetro indicado que en este caso es username pero puede ser otro
         const editUser = state.map(usuario =>(usuario.username === usuarioEditado.username ? usuarioEditado: usuario))
         //se setes para que se actualice
         setState(editUser);
     
+    } */
+
+    const userEdit = async(editUsuario) =>{
+        const usuarioBD = await editUser (editUsuario);
+        getUsers();
+    }
+  
+
+    const getUsers = async()=>{
+        const usuarioBD = await getAllUsers();
+        setState(usuarioBD);
+    }
+
+    /*  const userDelete=(usernameUsuario)=>{
+        const changeUser = state.filter(usuario=> usuario.username!==usernameUsuario);
+        setState(changeUser)
+    }; */
+
+    const userDelete = async(idUsuario)=>{
+        const usuarioBD= await deleteUser(idUsuario);
+        getUsers();
     }
      
     return(
